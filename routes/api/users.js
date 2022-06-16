@@ -5,6 +5,8 @@ const Userdata = require("../../models/users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../../middleware/auth");
+const admin = require("../../middleware/admin");
 
 //@route     POST api/users
 //@desc      Register User
@@ -64,18 +66,68 @@ router.post(
 				(error, token) => {
 					if (error) {
 						throw error;
-					}else{
-
-					res.json({ token });
-                    }
+					} else {
+						res.json({ token });
+					}
 				}
 			);
-			
 		} catch (error) {
 			console.log(error);
 			res.status(500).send("Server Error");
 		}
 	}
 );
+
+//@route     GET api/users
+//@desc      Get User List
+//@access    Private, Admin
+router.get("/", auth, admin, async (req, res) => {
+	try {
+		const users = await Userdata.find().select("-password");
+		if (!users) {
+			return res.status(400).json({ errors: [{ msg: "No User found." }] });
+		}
+
+		res.send(users);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send("Server Error");
+	}
+});
+
+//@route     POST api/users/:id
+//@desc      Update userrole with user_id 
+//@access    Private, Admin
+router.post("/:id", auth, admin, async (req, res) => {
+	try {
+		const users = await Userdata.findOneAndUpdate({_id: req.params.id },{ role: "mod" }).select("-password");
+		if (!users) {
+			return res.status(400).json({ errors: [{ msg: "No User found." }] });
+		}
+
+		res.send({msg:"User role is updated."});
+	} catch (error) {
+		console.log(error);
+		res.status(500).send("Server Error");
+	}
+});
+
+
+//@route     DELETE api/users/:id
+//@desc      Delete user with user_id 
+//@access    Private, Admin
+router.delete("/:id", auth, admin, async (req, res) => {
+	try {
+		const users = await Userdata.findOneAndDelete({_id: req.params.id });
+		if (!users) {
+			return res.status(400).json({ errors: [{ msg: "No User found." }] });
+		}
+
+		res.send({msg:"User is deleted."});
+	} catch (error) {
+		console.log(error);
+		res.status(500).send("Server Error");
+	}
+});
 
 module.exports = router;
