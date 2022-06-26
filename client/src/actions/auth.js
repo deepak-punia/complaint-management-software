@@ -96,6 +96,7 @@ export const login =
 				type: LOGIN,
 				payload: response.data,
 			});
+			dispatch(loadUser());
 		} catch (error) {
 
 			console.log(error)

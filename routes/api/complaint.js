@@ -59,7 +59,7 @@ router.post("/", auth, upload.single("complaint"), async (req, res) => {
 //@route     GET api/complaints
 //@desc      Get all complaints for admin
 //@access    Private , admin
-router.get("/", auth, admin, async (req, res) => {
+router.get("/", auth,  async (req, res) => {
 	try {
 		const complaints = await Complaint.find();
 		if (!complaints) {

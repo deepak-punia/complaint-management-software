@@ -14,7 +14,7 @@ const NavbarMenu = () => {
 
   const state = useSelector(state=>state.auth.isAuthenticated);
   
-  if(!state || !user.user.role){
+  if(!state || !user.user){
     return (
       <></>
     )

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Tabs, Tab } from "react-bootstrap";
+import { Container, Row, Col, Button, Tabs, Tab, Image } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setAlert } from "./actions/alert";
 import { useEffect, useState } from "react";
@@ -7,6 +7,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { loadUser } from "./actions/auth";
 import { useNavigate } from "react-router-dom";
+import './style.css';
+
+
 
 function App() {
 	const navigate = useNavigate();
@@ -19,20 +22,34 @@ function App() {
 		dispatch(loadUser());
 	}, []);
 
-	// if (user.isAuthenticated && user.user.role === "user") {
-	// 	navigate("/dashboard");
-	// } else if (user.isAuthenticated && user.user.role === "admin") {
-	// 	navigate("/admin");
-	// }else if (user.isAuthenticated && user.user.role === "mod") {
-	// 	navigate("/mod");
-	// }
+	if (user.isAuthenticated && user.user && user.user.role === "user") {
+		navigate("/dashboard");
+	} else if (user.isAuthenticated && user.user && user.user.role === "admin") {
+		navigate("/admin");
+	}else if (user.isAuthenticated && user.user && user.user.role === "mod") {
+		navigate("/mod");
+	}
 	return (
 		<>
+			
 			<Container fluid className="bg-primary vh-100">
 				<Row>
+				
 					<Col sm={7} className="bg-primary vh-100">
+						
 						<h1 className="text-white text-center">Complaint Management Software</h1>
-					</Col>
+						
+						<Col className="w-100 text-center p-4">
+              <Image
+                src="https://www.compliancequest.com/wp-content/uploads/2022/04/complaint-handling-system-to-improve-complaint-handling-process.jpg"
+                responsive
+              />
+            </Col>
+            <h2 className="text-white text-center">
+              Login or Create account to submit a complaint.
+            </h2>
+          </Col>
+					
 					<Col sm={5} className="bg-white vh-100">
 						<Col>
 							<Tabs
