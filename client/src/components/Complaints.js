@@ -18,6 +18,11 @@ const Complaints = (props) => {
 		dispatch(reslveComplaintwithid(id));
 	};
 
+	//capatilize first letter of string
+	const titleCase = (string) => {
+		return string[0].toUpperCase() + string.slice(1).toLowerCase();
+	};
+
 	return (
 		<Table striped bordered hover>
 			<thead>
@@ -40,22 +45,22 @@ const Complaints = (props) => {
 								to={`${location.pathname}/?id=${item._id}`}
 								onClick={(e) => setDetails(true)}
 							>
-								{item.title}
+								{titleCase(item.title)}
 							</Link>
 						</td>
-						<td>{item.priority}</td>
-						<td>{item.status}</td>
+						<td>{titleCase(item.priority)}</td>
+						<td>{titleCase(item.status)}</td>
 						<td>{item.replies.length}</td>
 						<td>
 							{item.status == "resolved" ? (
-								<Button disabled={"true"}>Resolved</Button>
+								<Button disabled={"true"} className="bg-success">Resolved</Button>
 							) : (
 								<Button onClick={(e) => handleDelete(e, item._id)}>
 									Mark Resolved
 								</Button>
 							)}
 						</td>
-						<td>{item.username}</td>
+						<td>{titleCase(item.username)}</td>
 					</tr>
 				))}
 			</tbody>

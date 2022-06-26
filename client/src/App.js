@@ -32,10 +32,10 @@ function App() {
 	return (
 		<>
 			
-			<Container fluid className="bg-primary vh-100">
+			<Container fluid className="bg-primary ">
 				<Row>
 				
-					<Col sm={7} className="bg-primary vh-100">
+					<Col sm={7} className="bg-primary min-vh-100">
 						
 						<h1 className="text-white text-center">Complaint Management Software</h1>
 						

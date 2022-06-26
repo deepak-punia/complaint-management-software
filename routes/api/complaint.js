@@ -39,13 +39,23 @@ router.post("/", auth, upload.single("complaint"), async (req, res) => {
 				.json({ errors: [{ msg: "Inalid User! Please Login." }] });
 		}
 
+		let imgUrl;
+		if(req.file){
+			imgUrl= req.file.path
+		}else{
+			imgUrl= undefined
+		}
+
+		const imagesdata = {
+			url: imgUrl
+		}
 		const complaintobj = new Complaint({
 			user_id: user._id,
 			priority: priority,
 			details: details,
 			title: title,
 			username: user.username,
-			imagesdata: { url: req.file.path },
+			imagesdata: imagesdata,
 		});
 
 		const complaintdata = await complaintobj.save();
@@ -118,7 +128,7 @@ router.get("/:id", auth, async (req, res) => {
 //@desc      add reply to complaint with id
 //@access    Private
 router.post("/:id", auth, upload.single("reply"), async (req, res) => {
-	const reply = req.body.reply;
+	const reply = req.body.replymsg;
 	try {
 		const user = await Userdata.findOne({ email: req.user });
 		if (!user) {
@@ -127,12 +137,23 @@ router.post("/:id", auth, upload.single("reply"), async (req, res) => {
 				.json({ errors: [{ msg: "Inalid User! Please Login." }] });
 		}
 
+		let imgUrl;
+		if(req.file){
+			imgUrl= req.file.path
+		}else{
+			imgUrl= null
+		}
+
+		const imagesdata = {
+			url: imgUrl
+		}
+
 		const replyobj = {
 			user_id: user._id,
 			reply: reply,
 			username: user.username,
 			userrole: user.role,
-			imagesdata: { url: req.file.path },
+			imagesdata: imagesdata,
 		};
 
 		const complaints = await Complaint.findOneAndUpdate(

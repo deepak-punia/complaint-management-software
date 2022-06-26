@@ -18,7 +18,7 @@ const Reply =  (props) => {
 		e.preventDefault();
 		const formData = new FormData()
         formData.append('reply', uploadfile);
-        formData.append('reply', reply);
+        formData.append('replymsg', reply);
 
         //send data to server
         try {
@@ -59,6 +59,7 @@ const Reply =  (props) => {
 							<Form.Control
 								type="text"
 								placeholder="Enter Your Response"
+								reuired={"true"}
 								value={reply}
 								onChange={(e) => setReply(e.target.value)}
 							/>
@@ -68,7 +69,7 @@ const Reply =  (props) => {
 						
 
                         <Form.Group controlId="formFile" className="mb-3">
-                         <Form.Label>Attach Image</Form.Label>
+                         <Form.Label>Attach Image  *optional*</Form.Label>
                          <Form.Control type="file" onChange={onFileChange}/>
                         </Form.Group>
 

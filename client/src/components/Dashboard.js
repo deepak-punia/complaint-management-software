@@ -30,11 +30,15 @@ const Dashboard = () => {
 		});
 	}, []);
 
+	if (!user.isAuthenticated || !user.user.role === "user") {
+		navigate("/");
+	}
+	
 	return (
 		<>
 			<Container fluid>
 				<Row>
-					<Col sm={2} className="bg-primary mh-100">
+					<Col sm={2} className="bg-primary min-vh-100">
 						<div className="d-grid gap-2">
 							<Button
 								variant="primary"
@@ -61,7 +65,7 @@ const Dashboard = () => {
 							<Complaints complaints={complaints} />
 						) : foo ? (
 							<>
-								<Link to={"/dashboard"}>Go Back</Link>
+								<Link to={"/dashboard"}><Button>Go Back</Button></Link>
 								<Complaint id={foo} />
 							</>
 						) : (

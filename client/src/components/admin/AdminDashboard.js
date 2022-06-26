@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Nav , Card} from "react-bootstrap";
+import { Container, Row, Col, Button, Nav, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadAllComplaints } from "../../actions/complaints";
 import { loadUsers } from "../../actions/users";
 import Alerts from "../Alerts";
 import Complaints from "../Complaints";
 import Complaint from "../Complaint";
-import Users from './Users';
+import Users from "./Users";
 import BarChart from "../BarChart";
 import InforCard from "../InfoCard";
 
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 	const [details, setDetails] = useState(false);
 	const navigate = useNavigate();
 	const user = useSelector((state) => state.auth);
-  const users = useSelector((state) => state.users.users);
+	const users = useSelector((state) => state.users.users);
 	const complaints = useSelector((state) => state.complaints.allcomplaints);
 	const dispatch = useDispatch();
 
@@ -29,11 +29,17 @@ const AdminDashboard = () => {
 		if (!user.isAuthenticated || !user.user.role == "admin") {
 			navigate("/");
 		}
-    dispatch(loadUsers());
+
 		dispatch(loadAllComplaints()).then(() => {
-			setDisplayComponent("dashboard");
+			dispatch(loadUsers()).then(() => {
+				setDisplayComponent("dashboard");
+			});
 		});
 	}, []);
+
+	if (!user.isAuthenticated || !user.user.role == "admin") {
+		navigate("/");
+	}
 
 	//switch to render different components
 	const renderSwitch = (param) => {
@@ -42,35 +48,60 @@ const AdminDashboard = () => {
 		} else if (foo) {
 			return (
 				<>
-					<Link to={"/admin"}>Go Back</Link>
+					<Link to={"/admin"}><Button>Go Back</Button></Link>
 					<Complaint id={foo} />
 				</>
 			);
 		} else if (param == "dashboard" && !foo) {
-      const resolved = complaints.filter((item)=> item.status=='resolved');
-      const pending = complaints.filter((item)=> item.status=='pending');
-      const Prioritypending = pending.filter((item)=> item.priority=='high');
-      const mods = users.filter((item)=> item.role=='mod');
+			const resolved = complaints.filter((item) => item.status == "resolved");
+			const pending = complaints.filter((item) => item.status == "pending");
+			const Prioritypending = pending.filter((item) => item.priority == "high");
+			const mods = users.filter((item) => item.role == "mod");
 
-      const data=[{ field: 'Total Complaints', data: complaints.length },
-      { field: 'Resolved', data: resolved.length },
-      { field: 'Pending', data: pending.length },
-      { field: 'High Priority Pending', data: Prioritypending.length },
-    ]
-			return (<>
-      <Card>
-      <Row>
-       
-      <Col><InforCard data={{title: 'Users: ', field: (users.length), style: "text-white bg-success"}} /></Col>
-      <Col><InforCard data={{title: 'Mods: ', field: (mods.length), style: "text-white bg-warning"}} /></Col>
-      <Col><InforCard data={{title: 'Complaints: ', field: (complaints.length), style: "text-white bg-danger"}} /></Col>
-      
-      </Row></Card> 
-      <BarChart data={data}/>
-
-      </>);
-		}else if (param == "users" && !foo) {
-			return <Users users={users}/>;
+			const data = [
+				{ field: "Total Complaints", data: complaints.length },
+				{ field: "Resolved", data: resolved.length },
+				{ field: "Pending", data: pending.length },
+				{ field: "High Priority Pending", data: Prioritypending.length },
+			];
+			return (
+				<>
+					<Card>
+						<Row>
+							<Col>
+								<InforCard
+									data={{
+										title: "Users: ",
+										field: users.length,
+										style: "text-white bg-success",
+									}}
+								/>
+							</Col>
+							<Col>
+								<InforCard
+									data={{
+										title: "Mods: ",
+										field: mods.length,
+										style: "text-white bg-warning",
+									}}
+								/>
+							</Col>
+							<Col>
+								<InforCard
+									data={{
+										title: "Complaints: ",
+										field: complaints.length,
+										style: "text-white bg-danger",
+									}}
+								/>
+							</Col>
+						</Row>
+					</Card>
+					<BarChart data={data} />
+				</>
+			);
+		} else if (param == "users" && !foo) {
+			return <Users users={users} />;
 		} else {
 			return <>Loading...</>;
 		}
@@ -78,9 +109,9 @@ const AdminDashboard = () => {
 
 	return (
 		<>
-			<Container fluid >
-				<Row >
-					<Col sm={2} className="bg-primary vh-100">
+			<Container fluid>
+				<Row>
+					<Col sm={2} className="bg-primary min-vh-100">
 						<div className="d-grid gap-2">
 							<Button
 								variant="primary"
@@ -90,7 +121,7 @@ const AdminDashboard = () => {
 								Dashboard
 							</Button>
 						</div>
-            <div className="d-grid gap-2">
+						<div className="d-grid gap-2">
 							<Button
 								variant="primary"
 								className="text-start"
@@ -99,7 +130,7 @@ const AdminDashboard = () => {
 								Complaints
 							</Button>
 						</div>
-            <div className="d-grid gap-2">
+						<div className="d-grid gap-2">
 							<Button
 								variant="primary"
 								className="text-start"
@@ -110,7 +141,7 @@ const AdminDashboard = () => {
 						</div>
 					</Col>
 
-					<Col sm={10} className="bg-white mh-100">
+					<Col sm={10} className="bg-white ">
 						<Alerts componentName={"admindashboard"} />
 						{renderSwitch(displayComponent)}
 					</Col>
