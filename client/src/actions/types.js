@@ -14,4 +14,4 @@ export const ALL_USER_COMPLAINTS = 'ALL_USER_COMPLAINTS';
 export const GET_USERS = 'GET_USERS';
 export const ERROR_GET_USERS = 'ERROR_GET_USERS';
 export const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE';
-export const API_ENDPOINT = 'http://localhost:5000';
+export const API_ENDPOINT = 'https://complaint-management-software.herokuapp.com';
