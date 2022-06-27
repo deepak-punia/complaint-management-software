@@ -1,0 +1,9 @@
+{
+    "mongoURI": "mongodb+srv://deepak1:punia1@cluster0.1jmbx.mongodb.net/test?retryWrites=true&w=majority",
+    "secretkay": "thisisasecret",
+    "ROLE": {
+        "USER":"user",
+        "MOD":"mod",
+        "ADMIN": "admin"
+    }
+}
