@@ -75,7 +75,7 @@ Moderator account - email: mod@mod.com password: password
 
 ## Screenshots
 
-![This is an image](https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/screenshot4.jpg?raw=true)
+![This is an image](https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/screen4.jpg?raw=true)
 
 ![This is an image](https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/dashboard.jpg?raw=true)
 
