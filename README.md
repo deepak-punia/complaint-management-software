@@ -17,6 +17,8 @@ Admin account - email: admin@admin.com password: password
 
 Moderator account - email: mod@mod.com password: password
 
+NOTE: Files are uploaded to the app but then disappear or are deleted after a while because heroku does not support file uploads that means that any changes to the filesystem whilst the dyno is running only last until that dyno is shut down or restarted. Each dyno boots with a clean copy of the filesystem from the most recent deploy.
+
 ## Features
 
 - Users can register account and submit a complaint.
