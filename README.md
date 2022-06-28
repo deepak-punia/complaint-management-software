@@ -12,8 +12,10 @@ Allow admin to monitor all complaints and users.
 
 #### [LIVE DEMO]( https://complaint-management-software.herokuapp.com/)
 
- Admin account - email: admin@admin.com password: password
- Moderator account - email: mod@mod.com password: password
+ 
+Admin account - email: admin@admin.com password: password
+
+Moderator account - email: mod@mod.com password: password
 
 ## Features
 
@@ -73,7 +75,6 @@ Allow admin to monitor all complaints and users.
 
 ## Screenshots
 
-![This is an image](https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/1-1.jpg?raw=true)
 
 ![This is an image](https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/dashboard.jpg?raw=true)
 
