@@ -64,7 +64,8 @@ export const register =
 				type: REGISTER_SUCCESS,
 				payload: response.data,
 			});
-			dispatch(setAlert("Register Successfull! Please Login", "success","register"));
+			dispatch(setAlert("Register Successfull! ", "success","register"));
+			dispatch(loadUser());
 		} catch (error) {
 			console.log(error);
 			dispatch(setAlert("Register Failed! Please try again", "danger","register"));

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Tabs, Tab, Image } from "react-bootstrap";
+import { Container, Row, Col, Card, Tabs, Tab, Image, Carousel } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setAlert } from "./actions/alert";
 import { useEffect, useState } from "react";
@@ -40,10 +40,41 @@ function App() {
 						<h1 className="text-white text-center">Complaint Management Software</h1>
 						
 						<Col className="w-100 text-center p-4">
-              <Image
-                src="https://www.compliancequest.com/wp-content/uploads/2022/04/complaint-handling-system-to-improve-complaint-handling-process.jpg"
-                responsive
-              />
+              <Carousel>
+                <Carousel.Item>
+                  <Card>
+                    <Card.Body>
+                      <img
+                        className="d-block w-100 "
+                        src="https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/1-1.jpg?raw=true"
+                        alt="First slide"
+                      />
+                    </Card.Body>
+                  </Card>
+                </Carousel.Item>
+                <Carousel.Item>
+                  <Card>
+                    <Card.Body>
+                      <img
+                        className="d-block w-100 h-200px"
+                        src="https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/dashboard.jpg"
+                        alt="Second slide"
+                      />
+                    </Card.Body>
+                  </Card>
+                </Carousel.Item>
+                <Carousel.Item>
+                  <Card>
+                    <Card.Body>
+                      <img
+                        className="d-block w-100"
+                        src="https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/users.jpg?raw=true"
+                        alt="Third slide"
+                      />
+                    </Card.Body>
+                  </Card>
+                </Carousel.Item>
+              </Carousel>
             </Col>
             <h2 className="text-white text-center">
               Login or Create account to submit a complaint.
