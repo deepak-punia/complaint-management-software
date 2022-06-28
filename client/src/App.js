@@ -57,7 +57,7 @@ function App() {
                     <Card.Body>
                       <img
                         className="d-block w-100 h-200px"
-                        src="https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/dashboard.jpg"
+                        src="https://github.com/deepak-punia/complaint-management-software/blob/main/uploads/dashboard.jpg?raw=true"
                         alt="Second slide"
                       />
                     </Card.Body>
